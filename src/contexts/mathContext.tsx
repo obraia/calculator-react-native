@@ -39,7 +39,9 @@ export default function ExpressionProvider({ children }: any) {
   }
 
   const deleteLastValue = () => {
-    setExpression(String(expression).slice(0, -1).trim());
+    const newExpression = String(expression).slice(0, -1).trim();
+    setExpression(newExpression);
+    if (newExpression === '') setResult('0');
   }
 
   const clearAll = () => {

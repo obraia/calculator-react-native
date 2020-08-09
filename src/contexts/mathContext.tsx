@@ -14,7 +14,7 @@ export default function ExpressionProvider({ children }: any) {
       setExpression(expression + value.command);
     }
     else if (value.type === 'operator') {
-      if ((expression.length > 0 || value.command === '-') && !lastIsOperator()) {
+      if ((String(expression).length > 0 || value.command === '-') && !lastIsOperator()) {
         setExpression(expression + value.command);
       }
     }
@@ -28,11 +28,11 @@ export default function ExpressionProvider({ children }: any) {
 
   const lastIsOperator = () => {
     const lastValue = expression[expression.length - 1];
-    return (lastValue && isNaN(Number(lastValue)) || lastValue === '.');
+    return (lastValue && isNaN(Number(lastValue)) && isNaN(Number(expression))  ||lastValue === '.');
   }
 
   const addDot = () => {
-    const expressions = expression.split(/[^0-9\.]/g);
+    const expressions = String(expression).split(/[^0-9\.]/g);
     if (!expressions[expressions.length - 1].includes('.')) {
       setExpression(expression + '.');
     }
@@ -51,7 +51,7 @@ export default function ExpressionProvider({ children }: any) {
     if (expression && !lastIsOperator()) {
       const result = eval(expression);
       setResult(result);
-      if (!autoSolve && Number.isInteger(result)) setExpression(result);
+      if (!autoSolve && !isNaN(result)) setExpression(result);
     }
   };
 

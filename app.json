@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "calculator",
+    "name": "Calculator",
     "slug": "calculator",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,6 +18,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.obraia.calculator"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -20,7 +20,11 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.obraia.calculator"
+      "package": "com.obraia.calculator",
+      "adaptiveIcon": {
+        "backgroundColor": "#E8E8E8",
+        "foregroundImage": "./assets/icon.png"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

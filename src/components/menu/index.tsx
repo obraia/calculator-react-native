@@ -50,12 +50,12 @@ const Home = () => {
             <Item>
               <ItemTitle>Buttons round</ItemTitle>
               <Slider
-                style={{ width: '30%', marginEnd: 10, transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+                style={{ width: '50%' }}
                 step={5}
                 value={Number(theme?.shapes.buttonRadius)}
                 onSlidingComplete={value => setButtonsRadius(value)}
                 minimumValue={0}
-                maximumValue={50}
+                maximumValue={100}
                 thumbTintColor={theme?.colors.primary}
                 minimumTrackTintColor={theme?.colors.primary} />
             </Item>

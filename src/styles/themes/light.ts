@@ -21,6 +21,6 @@ export default {
   },
 
   shapes: {
-    buttonRadius: 50
+    buttonRadius: 100
   }
 };

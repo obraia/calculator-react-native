@@ -65,7 +65,7 @@ export const Footer = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 0 15px;
   background-color: ${props => lighten(0.1, props.theme.colors.background)};
 `;
 

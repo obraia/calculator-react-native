@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 
@@ -26,18 +26,21 @@ export default function ThemeConfigProvider({ children }: any) {
   };
 
   const setButtonsRadius = (value: number) => {
-    light.shapes.buttonRadius = value;
-    dark.shapes.buttonRadius = value;
-
-    setTheme(theme.title === 'light' ? {...light} : {...dark});
+    const newTheme = {...theme};
+    newTheme.shapes.buttonRadius = value;
+    setTheme(newTheme);
   }
 
   const setPrimaryColor = (value: string) => {
-    light.colors.primary = value;
-    dark.colors.primary = value;
-
-    setTheme(theme.title === 'light' ? { ...light } : { ...dark });
+    const newTheme = { ...theme };
+    newTheme.colors.primary = value;
+    setTheme(newTheme);
   }
+
+  useEffect(() => {
+    light.shapes.buttonRadius = Number(theme.shapes.buttonRadius);
+    dark.shapes.buttonRadius = Number(theme.shapes.buttonRadius);
+  }, [theme.shapes.buttonRadius])
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setButtonsRadius, setPrimaryColor }}>

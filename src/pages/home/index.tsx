@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Clipboard } from 'react-native';
+import { Snackbar } from 'react-native-paper';
 import { useMathContext } from '../../contexts/mathContext';
 import Button from '../../components/button';
 
@@ -31,17 +33,23 @@ const buttons = [
 const Home = () => {
 
   const { expression, result } = useMathContext();
+  const [snackbar, setSnackbar] = useState({ visible: false, text: '' });
 
   const getFontSize = () => {
     const resultLength = String(result).length;
     return (resultLength > 6) ? 72 - resultLength * 2 : 72;
   }
 
+  const copyToClipboard = (text: string = '') => {
+    Clipboard.setString(String(text));
+    setSnackbar({ visible: true, text: 'Copied to Clipboard' });
+  }
+
   return (
     <Container>
       <Screen>
-        <Expression>{expression}</Expression>
-        <Result style={{ fontSize: getFontSize()}}>{result}</Result>
+        <Expression onLongPress={() => copyToClipboard(expression)}>{expression}</Expression>
+        <Result style={{ fontSize: getFontSize() }} onLongPress={() => copyToClipboard(result)}>{result}</Result>
       </Screen>
       <Grid>
         {buttons.map((data, i) => (
@@ -50,6 +58,9 @@ const Home = () => {
           </Item>
         ))}
       </Grid>
+      <Snackbar visible={snackbar.visible} duration={1000} onDismiss={() => setSnackbar({ visible: false, text: '' })}>
+        {snackbar.text}
+      </Snackbar>
     </Container>
   );
 }

@@ -48,9 +48,10 @@ const Home = () => {
             </Item>
 
             <Item>
-              <ItemTitle>Buttons radius range</ItemTitle>
+              <ItemTitle>Buttons round</ItemTitle>
               <Slider
-                style={{ width: 60, marginEnd: 5, transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+                style={{ width: '30%', marginEnd: 10, transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }] }}
+                step={5}
                 value={Number(theme?.shapes.buttonRadius)}
                 onSlidingComplete={value => setButtonsRadius(value)}
                 minimumValue={0}

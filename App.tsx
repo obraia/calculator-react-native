@@ -1,17 +1,16 @@
 import React from 'react';
-import MathProvider from './src/contexts/mathContext';
+import { Provider } from 'react-redux';
 import ThemeProvider from './src/contexts/themeContex';
-import ModalProvider from './src/contexts/modalContext';
 import Index from './src';
+
+import { store } from './src/store';
 
 export default function App() {
   return (
     <ThemeProvider>
-      <ModalProvider>
-        <MathProvider>
-          <Index />
-        </MathProvider>
-      </ModalProvider>
+      <Provider store={store}>
+        <Index />
+      </Provider>
     </ThemeProvider>
   );
 }

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Screen from '../../components/screen';
 import Keyboard from '../../components/keyboard';
 
 import { Container } from './styles';
 
 const Home = () => {
-  console.log('[Home] render')
+  console.log('[Home] render');
 
   return (
     <Container>
@@ -15,4 +15,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default memo(Home);

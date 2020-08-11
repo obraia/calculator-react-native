@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react';
-import { ButtonData } from '../../interfaces';
+import React from 'react';
+import { connect, DispatchProp } from 'react-redux';
+import { ButtonProps } from '../../interfaces';
 import { useThemeContext } from '../../contexts/themeContex';
-import { useMathContext } from '../../contexts/mathContext';
+
+import { actions } from '../../actions/calc';
+
 import { Container, Label } from './styles';
 
-const Button = (props: { data: ButtonData }) => {
+const Button = (props: { data: ButtonProps, insertValue }) => {
   console.log('[Button] render');
 
-  const { addValue } = useMathContext();
   const { theme } = useThemeContext();
 
   const getButtonTextcolor = () => {
@@ -15,11 +17,15 @@ const Button = (props: { data: ButtonData }) => {
   }
 
   return (
-    <Container onPressIn={() => addValue(props.data)}>
+    <Container onPressIn={() => props.insertValue(props.data)}>
       {props.data.icon ? <props.data.icon fill={theme?.colors.primary} /> :
         <Label style={{ color: getButtonTextcolor() }}>{props.data.command}</Label>}
     </Container>
   );
 }
 
-export default Button;
+const mapDispatchToProps = dispatch => ({
+  insertValue: (value: ButtonProps) => dispatch(actions.insertValue(value))
+});
+
+export default connect(null, mapDispatchToProps)(Button);

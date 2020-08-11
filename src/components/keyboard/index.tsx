@@ -31,17 +31,13 @@ const buttons = [
 const Home = () => {
   console.log('[Keyboard] render')
 
-  const { theme } = useThemeContext();
-
-  return useMemo(() => (
-    <Grid>
-      {buttons.map((data, i) => (
-        <Item key={data.command} style={{ height: (i === buttons.length - 1) ? '40%' : '20%' }}>
-          <Button data={data} />
-        </Item>
-      ))}
-    </Grid>
-  ), [theme]);
+  return (<Grid>
+    {buttons.map((data, i) => (
+      <Item key={data.command} style={{ height: (i === buttons.length - 1) ? '40%' : '20%' }}>
+        <Button data={data} />
+      </Item>
+    ))}
+  </Grid>);
 }
 
 export default Home;

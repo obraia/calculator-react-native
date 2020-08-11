@@ -1,16 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
-import { useModalContext } from './contexts/modalContext';
 import { useThemeContext } from './contexts/themeContex';
 
 import Header from './components/header';
 import Home from './pages/home';
-
 import MenuModal from './components/menu';
 
-const Index = () => {
+const Index = (props: { menuIsOpen?: Boolean }) => {
 
-  const { menuIsOpen} = useModalContext();
   const { theme } = useThemeContext();
 
   const getStatusbarColor = () => {
@@ -22,9 +20,13 @@ const Index = () => {
       <StatusBar style={getStatusbarColor()} />
       <Header />
       <Home />
-      {menuIsOpen && <MenuModal />}
+      {props.menuIsOpen && <MenuModal />}
     </>
   );
 }
 
-export default Index;
+const mapStateToProps = (state: any) => ({
+  menuIsOpen: state.menuReducers.isOpen,
+});
+
+export default connect(mapStateToProps, null)(Index);

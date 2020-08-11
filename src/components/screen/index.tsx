@@ -1,14 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Clipboard } from 'react-native';
 import { Snackbar } from 'react-native-paper';
-import { useMathContext } from '../../contexts/mathContext';
 
 import { Container, Expression, Result } from './styles';
 
-const Screen = () => {
+const Screen = ({ expression, result}) => {
   console.log('[Screen] render');
 
-  const { expression, result } = useMathContext();
   const [snackbar, setSnackbar] = useState({ visible: false, text: '' });
 
   const getFontSize = () => {
@@ -34,4 +33,9 @@ const Screen = () => {
   );
 }
 
-export default Screen;
+const mapStateToProps = state => ({
+  expression: state.calcReducers.expression,
+  result: state.calcReducers.result,
+});
+
+export default connect(mapStateToProps)(Screen);

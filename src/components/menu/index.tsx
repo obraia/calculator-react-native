@@ -1,14 +1,13 @@
 import React, { useMemo } from 'react';
+import { connect } from 'react-redux';
 import { Slider, Linking } from 'react-native'
 import { Switch } from 'react-native-paper';
 
-import { useModalContext } from '../../contexts/modalContext'
+import { actions } from '../../actions/menu';
 import { useThemeContext } from '../../contexts/themeContex';
 
 import ColorButton from '../colorButton';
-
 import GithubIcon from '../../components/svg/github';
-
 import {
   Container,
   Modal,
@@ -23,24 +22,23 @@ import {
   OutsideArea
 } from './styles';
 
-const Menu = () => {
+const Menu = (props: { toggleMenu?: () => void }) => {
   console.log('[Menu] render');
 
-  const { toggleMenu } = useModalContext();
   const { theme, toggleTheme, setButtonsRadius } = useThemeContext();
 
   const goToGitHubProfile = () => {
     Linking.openURL('https://github.com/obraia/calculator-react-native');
   }
 
-  return useMemo(() => (
+  return (
     <>
-      <OutsideArea onTouchStart={toggleMenu} />
+      <OutsideArea onTouchStart={props.toggleMenu} />
       <Container>
         <Modal>
           <Header>
             <Title>Configurations</Title>
-            <CloseButton onPress={toggleMenu} />
+            <CloseButton onPress={props.toggleMenu} />
           </Header>
           <Body>
             <Item>
@@ -82,7 +80,11 @@ const Menu = () => {
         </Modal>
       </Container>
     </>
-  ), [theme]);
+  );
 }
 
-export default Menu;
+const mapDispatchToProps = dispatch => ({
+  toggleMenu: () => dispatch(actions.toggleMenu())
+});
+
+export default connect(null, mapDispatchToProps)(Menu);

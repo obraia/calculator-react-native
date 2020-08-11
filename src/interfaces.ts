@@ -10,3 +10,12 @@ export interface MathExpression {
   addValue?: (value: ButtonProps) => void;
   solveExpression?: (autoSolve: Boolean) => void;
 }
+
+export interface CalcState {
+  result: string;
+  expression: string;
+}
+
+export interface MenuState {
+  isOpen: Boolean;
+}

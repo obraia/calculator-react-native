@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect, DispatchProp } from 'react-redux';
+import { connect } from 'react-redux';
 import { useThemeContext } from '../../contexts/themeContex';
-import { actions } from '../../actions/menu';
+import { Creators as menuActions } from '../../store/ducks/menu';
 import { Container, Title, Button } from './styles';
 
 import MenuIcon from '../svg/menu';
@@ -19,8 +19,8 @@ const Header = (props: { toggleMenu?: () => void }) => {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  toggleMenu: () => dispatch(actions.toggleMenu())
+const mapDispatchToProps = (dispatch: any) => ({
+  toggleMenu: () => dispatch(menuActions.toggleMenu())
 });
 
 export default connect(null, mapDispatchToProps )(Header);

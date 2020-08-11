@@ -5,13 +5,13 @@ import { Snackbar } from 'react-native-paper';
 
 import { Container, Expression, Result } from './styles';
 
-const Screen = ({ expression, result}) => {
+const Screen = (props: { expression: string, result: string }) => {
   console.log('[Screen] render');
 
   const [snackbar, setSnackbar] = useState({ visible: false, text: '' });
 
   const getFontSize = () => {
-    const resultLength = String(result).length;
+    const resultLength = String(props.result).length;
     return (resultLength > 6) ? 72 - resultLength * 2 : 72;
   }
 
@@ -23,17 +23,24 @@ const Screen = ({ expression, result}) => {
   return (
     <>
       <Container>
-        <Expression onLongPress={() => copyToClipboard(expression)}>{expression}</Expression>
-        <Result style={{ fontSize: getFontSize() }} onLongPress={() => copyToClipboard(result)}>{result}</Result>
+        <Expression onLongPress={() => copyToClipboard(props.expression)}>
+          {props.expression}
+        </Expression>
+        <Result style={{ fontSize: getFontSize() }} onLongPress={() => copyToClipboard(props.result)}>
+          {props.result}
+        </Result>
       </Container>
-      <Snackbar visible={snackbar.visible} duration={1000} onDismiss={() => setSnackbar({ visible: false, text: '' })}>
+      <Snackbar
+        visible={snackbar.visible}
+        duration={1000}
+        onDismiss={() => setSnackbar({ visible: false, text: '' })}>
         {snackbar.text}
       </Snackbar>
     </>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   expression: state.calcReducers.expression,
   result: state.calcReducers.result,
 });

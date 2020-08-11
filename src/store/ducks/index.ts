@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { reducers as calcReducers } from './calc';
-import { reducers as menuReducers } from './menu';
+import calcReducers from './calc';
+import menuReducers from './menu';
 
 const reducers = combineReducers({
     calcReducers,

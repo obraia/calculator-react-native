@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Slider, Linking } from 'react-native'
 import { Switch } from 'react-native-paper';
-
-import { actions } from '../../actions/menu';
 import { useThemeContext } from '../../contexts/themeContex';
+import { Creators as menuActions } from '../../store/ducks/menu';
 
 import ColorButton from '../colorButton';
 import GithubIcon from '../../components/svg/github';
+
 import {
   Container,
   Modal,
@@ -83,8 +83,8 @@ const Menu = (props: { toggleMenu?: () => void }) => {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  toggleMenu: () => dispatch(actions.toggleMenu())
+const mapDispatchToProps = (dispatch: any) => ({
+  toggleMenu: () => dispatch(menuActions.toggleMenu())
 });
 
 export default connect(null, mapDispatchToProps)(Menu);

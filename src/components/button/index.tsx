@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ButtonData } from '../../interfaces';
 import { useThemeContext } from '../../contexts/themeContex';
 import { useMathContext } from '../../contexts/mathContext';
-import { Button, Label } from './styles';
+import { Container, Label } from './styles';
 
-const Home = (props: { data: ButtonData }) => {
+const Button = (props: { data: ButtonData }) => {
+  console.log('[Button] render');
 
   const { addValue } = useMathContext();
   const { theme } = useThemeContext();
@@ -14,11 +15,11 @@ const Home = (props: { data: ButtonData }) => {
   }
 
   return (
-    <Button onPressIn={() => addValue(props.data)}>
+    <Container onPressIn={() => addValue(props.data)}>
       {props.data.icon ? <props.data.icon fill={theme?.colors.primary} /> :
         <Label style={{ color: getButtonTextcolor() }}>{props.data.command}</Label>}
-    </Button>
+    </Container>
   );
 }
 
-export default Home;
+export default Button;

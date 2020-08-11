@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Slider, Linking } from 'react-native'
 import { Switch } from 'react-native-paper';
 
@@ -23,7 +23,8 @@ import {
   OutsideArea
 } from './styles';
 
-const Home = () => {
+const Menu = () => {
+  console.log('[Menu] render');
 
   const { toggleMenu } = useModalContext();
   const { theme, toggleTheme, setButtonsRadius } = useThemeContext();
@@ -32,7 +33,7 @@ const Home = () => {
     Linking.openURL('https://github.com/obraia/calculator-react-native');
   }
 
-  return (
+  return useMemo(() => (
     <>
       <OutsideArea onTouchStart={toggleMenu} />
       <Container>
@@ -81,7 +82,7 @@ const Home = () => {
         </Modal>
       </Container>
     </>
-  );
+  ), [theme]);
 }
 
-export default Home;
+export default Menu;

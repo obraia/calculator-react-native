@@ -1,16 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ThemeProvider from './src/contexts/themeContex';
+import { PersistGate } from 'redux-persist/integration/react';
 import Index from './src';
 
-import { store } from './src/store';
+import { store, persistor } from './src/store';
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <Index />
-      </Provider>
-    </ThemeProvider>
+      </PersistGate>
+    </Provider>
   );
 }

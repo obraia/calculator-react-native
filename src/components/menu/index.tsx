@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Slider, Linking } from 'react-native'
 import { Switch } from 'react-native-paper';
-import { useThemeContext } from '../../contexts/themeContex';
+import { Reducers } from '../../interfaces';
 import { Creators as menuActions } from '../../store/ducks/menu';
-
-import ColorButton from '../colorButton';
+import { Creators as themeActions } from '../../store/ducks/theme';
 import GithubIcon from '../../components/svg/github';
+import ColorButton from '../colorButton';
 
 import {
   Container,
@@ -22,10 +22,11 @@ import {
   OutsideArea
 } from './styles';
 
-const Menu = (props: { toggleMenu?: () => void }) => {
-  console.log('[Menu] render');
+const Menu = () => {
+  // console.log('[Menu] render');
 
-  const { theme, toggleTheme, setButtonsRadius } = useThemeContext();
+  const { theme } = useSelector((state: Reducers) => state.themeReducers);
+  const dispatch = useDispatch();
 
   const goToGitHubProfile = () => {
     Linking.openURL('https://github.com/obraia/calculator-react-native');
@@ -33,17 +34,19 @@ const Menu = (props: { toggleMenu?: () => void }) => {
 
   return (
     <>
-      <OutsideArea onTouchStart={props.toggleMenu} />
+      <OutsideArea onTouchStart={() => dispatch(menuActions.toggleMenu())} />
       <Container>
         <Modal>
           <Header>
             <Title>Configurations</Title>
-            <CloseButton onPress={props.toggleMenu} />
+            <CloseButton onPress={() => dispatch(menuActions.toggleMenu())} />
           </Header>
           <Body>
             <Item>
               <ItemTitle>Dark mode</ItemTitle>
-              <Switch value={theme?.title === 'dark'} onValueChange={toggleTheme} color={theme?.colors.primary} />
+              <Switch value={theme.title === 'dark'}
+                onValueChange={() => dispatch(themeActions.toggleTheme())}
+                color={theme.colors.primary} />
             </Item>
 
             <Item>
@@ -51,12 +54,12 @@ const Menu = (props: { toggleMenu?: () => void }) => {
               <Slider
                 style={{ width: '50%' }}
                 step={5}
-                value={Number(theme?.shapes.buttonRadius)}
-                onSlidingComplete={value => setButtonsRadius(value)}
+                value={Number(theme.shapes.buttonRadius)}
+                onSlidingComplete={value => dispatch(themeActions.setRadius(value))}
                 minimumValue={0}
                 maximumValue={100}
-                thumbTintColor={theme?.colors.primary}
-                minimumTrackTintColor={theme?.colors.primary} />
+                thumbTintColor={theme.colors.primary}
+                minimumTrackTintColor={theme.colors.primary} />
             </Item>
 
             <Item>
@@ -64,18 +67,18 @@ const Menu = (props: { toggleMenu?: () => void }) => {
             </Item>
 
             <Item>
-              <ColorButton color={theme?.colors.color1} />
-              <ColorButton color={theme?.colors.color2} />
-              <ColorButton color={theme?.colors.color3} />
-              <ColorButton color={theme?.colors.color4} />
-              <ColorButton color={theme?.colors.color5} />
-              <ColorButton color={theme?.colors.color6} />
+              <ColorButton color={theme.colors.color1} />
+              <ColorButton color={theme.colors.color2} />
+              <ColorButton color={theme.colors.color3} />
+              <ColorButton color={theme.colors.color4} />
+              <ColorButton color={theme.colors.color5} />
+              <ColorButton color={theme.colors.color6} />
             </Item>
 
           </Body>
           <Footer onPress={goToGitHubProfile}>
             <FooterText>Github app repository</FooterText>
-            <GithubIcon fill={theme?.colors.primary} />
+            <GithubIcon fill={theme.colors.primary} />
           </Footer>
         </Modal>
       </Container>
@@ -83,8 +86,4 @@ const Menu = (props: { toggleMenu?: () => void }) => {
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  toggleMenu: () => dispatch(menuActions.toggleMenu())
-});
-
-export default connect(null, mapDispatchToProps)(Menu);
+export default Menu;

@@ -1,10 +1,7 @@
-import React, { useMemo } from 'react';
-import { useThemeContext } from '../../contexts/themeContex';
+import React from 'react';
 import Button from '../../components/button';
-
-import { Grid, Item } from './styles';
-
 import BackspaceIcon from '../../components/svg/backspace';
+import { Grid, Item } from './styles';
 
 const buttons = [
   { command: 'C', type: 'function', icon: null },
@@ -29,7 +26,7 @@ const buttons = [
 ];
 
 const Home = () => {
-  console.log('[Keyboard] render')
+  // console.log('[Keyboard] render')
 
   return (<Grid>
     {buttons.map((data, i) => (

@@ -1,32 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
-import { useThemeContext } from './contexts/themeContex';
+import { ThemeProvider } from 'styled-components';
+import { Reducers } from './interfaces';
 
 import Header from './components/header';
 import Home from './pages/home';
 import MenuModal from './components/menu';
 
-const Index = (props: { menuIsOpen?: Boolean }) => {
+const Index = () => {
 
-  const { theme } = useThemeContext();
+  const { theme } = useSelector((state: Reducers) => state.themeReducers);
+  const menuIsOpen = useSelector((state: Reducers) => state.menuReducers.isOpen);
 
   const getStatusbarColor = () => {
     return theme?.title === 'light' ? 'dark' : 'light';
   }
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <StatusBar style={getStatusbarColor()} />
       <Header />
       <Home />
-      {props.menuIsOpen && <MenuModal />}
-    </>
+      {menuIsOpen && <MenuModal />}
+    </ThemeProvider>
   );
 }
 
-const mapStateToProps = (state: any) => ({
-  menuIsOpen: state.menuReducers.isOpen,
-});
-
-export default connect(mapStateToProps, null)(Index);
+export default Index;

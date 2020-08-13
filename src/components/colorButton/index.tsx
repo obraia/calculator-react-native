@@ -1,15 +1,15 @@
 import React from 'react';
-import { useThemeContext } from '../../contexts/themeContex';
-import { useMathContext } from '../../contexts/mathContext';
+import { useDispatch } from 'react-redux';
+import { Creators as themeActions } from '../../store/ducks/theme';
 import { Container } from './styles';
 
-const ColorButton = (props: { color?: string }) => {
+const ColorButton = (props: { color: string }) => {
 
-  const { setPrimaryColor } = useThemeContext();
+  const dispatch = useDispatch();
 
   return (
     <Container style={{ aspectRatio: 1, backgroundColor: props.color }}
-      onPress={() => setPrimaryColor(props.color || 'red')} />
+      onPress={() => dispatch(themeActions.setPrimaryColor(props.color))} />
   );
 }
 

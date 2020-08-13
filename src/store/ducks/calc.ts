@@ -42,7 +42,11 @@ const utils = {
   solveExpression: (state: CalcState, autoSolve: Boolean) => {
     if (state.expression && !utils.lastIsOperator(state.expression)) {
       const result = eval(state.expression);
-      state.result = result;
+      const resultParts = String(result).split('.');
+
+      if (resultParts[1]?.length > 8) state.result = parseFloat(result).toFixed(8);
+      else state.result = result;
+
       if (!autoSolve && !isNaN(result)) {
         state.expression = result;
       };
@@ -67,5 +71,17 @@ const utils = {
   clearAll: (state: CalcState) => {
     state.result = '0';
     state.expression = '';
+  },
+  round: (num: number, places: number) => {
+    if (!("" + num).includes("e")) {
+      return +(Math.round(Number(num + "e+" + places)) + "e-" + places);
+    } else {
+      let arr = ("" + num).split("e");
+      let sig = ""
+      if (+arr[1] + places > 0) {
+        sig = "+";
+      }
+      return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + places)) + "e-" + places);
+    }
   }
 }

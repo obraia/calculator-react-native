@@ -61,6 +61,7 @@ const utils = {
   deleteLastValue: (state: CalcState) => {
     const newExpression = String(state.expression).slice(0, -1).trim();
     state.expression = newExpression;
+    utils.solveExpression(state, true);
     if (newExpression === '') state.result = '0';
   },
   clearAll: (state: CalcState) => {

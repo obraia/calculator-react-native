@@ -23,7 +23,7 @@
       "package": "com.obraia.calculator",
       "adaptiveIcon": {
         "backgroundColor": "#E8E8E8",
-        "foregroundImage": "./assets/icon.png"
+        "foregroundImage": "./assets/icon-adaptive.png"
       }
     },
     "web": {

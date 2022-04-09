@@ -2,7 +2,7 @@
   "expo": {
     "name": "Calculator",
     "slug": "calculator",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,11 +21,12 @@
     },
     "android": {
       "package": "com.obraia.calculator",
-      "versionCode": 2,
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#E8E8E8",
         "foregroundImage": "./assets/icon-adaptive.png"
-      }
+      },
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"

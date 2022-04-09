@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
-const { width, height } = (Dimensions.get('window'));
+const { width } = Dimensions.get('window');
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${props => props.theme.colors.background};
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 export const Screen = styled.View`
@@ -16,7 +16,7 @@ export const Screen = styled.View`
 export const Expression = styled.Text`
   padding: 5px 10px;
   font-size: 18px;
-  color: ${props => props.theme.colors.textBackground};
+  color: ${(props) => props.theme.colors.textBackground};
 `;
 
 export const Result = styled.Text`
@@ -24,12 +24,12 @@ export const Result = styled.Text`
   margin-top: auto;
   margin-left: auto;
   font-size: 72px;
-  color: ${props => props.theme.colors.textBackground};
+  color: ${(props) => props.theme.colors.textBackground};
 `;
 
 export const Grid = styled.View`
   flex-wrap: wrap;
-  height: ${(width * 1.25) + 'px'};
+  height: ${width * 1.25 + 'px'};
   padding: 10px;
 `;
 

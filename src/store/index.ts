@@ -1,15 +1,13 @@
-import { createStore } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
-import { AsyncStorage } from 'react-native';
+import { createStore } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-community/async-storage";
 
-import { reducers } from './ducks';
+import { reducers } from "./ducks";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: AsyncStorage,
-  blacklist: [
-    'menuReducers',
-  ],
+  blacklist: ["menuReducers"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

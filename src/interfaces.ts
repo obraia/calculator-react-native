@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from 'styled-components';
 
 export interface ButtonProps {
   command: string;
@@ -13,6 +13,14 @@ export interface ThemeState {
 export interface CalcState {
   result: string;
   expression: string;
+  mode: 'default' | 'intervalo de confiança';
+  intervaloConfianca: {
+    result: string;
+    amostraA: Array<number>;
+    amostraB: Array<number>;
+    nivelConfianca: string;
+    step: 1 | 2 | 3;
+  };
 }
 
 export interface MenuState {
@@ -20,14 +28,7 @@ export interface MenuState {
 }
 
 export interface Reducers {
-  themeReducers: {
-    theme: DefaultTheme;
-  };
-  calcReducers: {
-    result: string;
-    expression: string;
-  };
-  menuReducers: {
-    isOpen: Boolean;
-  };
+  themeReducers: ThemeState;
+  calcReducers: CalcState;
+  menuReducers: MenuState;
 }

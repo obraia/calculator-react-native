@@ -12,15 +12,23 @@ const Button = (props: { data: ButtonProps }) => {
   const dispatch = useDispatch();
 
   const getButtonTextcolor = () => {
-    return props.data.type === 'function' || props.data.type === 'operator' ? theme.colors.primary : theme.colors.textBackground;
-  }
+    return props.data.type === 'function' || props.data.type === 'operator'
+      ? theme.colors.primary
+      : theme.colors.textBackground;
+  };
 
   return (
-    <Container onPressIn={() => dispatch(calcActions.insertValue(props.data))}>
-      {props.data.icon ? <props.data.icon fill={theme?.colors.primary} /> :
-        <Label style={{ color: getButtonTextcolor() }}>{props.data.command}</Label>}
+    <Container
+      onPress={() => dispatch(calcActions.insertValue(props.data))}
+      onLongPress={() => dispatch(calcActions.customAction(props.data))}
+    >
+      {props.data.icon ? (
+        <props.data.icon fill={theme?.colors.primary} />
+      ) : (
+        <Label style={{ color: getButtonTextcolor() }}>{props.data.command}</Label>
+      )}
     </Container>
   );
-}
+};
 
 export default Button;

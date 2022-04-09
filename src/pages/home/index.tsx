@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import Screen from '../../components/screen';
 import Keyboard from '../../components/keyboard';
 
@@ -13,6 +13,6 @@ const Home = () => {
       <Keyboard />
     </Container>
   );
-}
+};
 
 export default memo(Home);

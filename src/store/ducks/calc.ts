@@ -98,9 +98,16 @@ const utils = {
     }
   },
   clearAll: (state: CalcState) => {
-    state.result = '0';
-    state.expression = '';
-    state.intervaloConfianca.step = 1;
+    if (state.mode === 'default') {
+      state.result = '0';
+      state.expression = '';
+    } else if (state.mode === 'intervalo de confiança') {
+      state.intervaloConfianca.result = '';
+      state.intervaloConfianca.amostraA = [];
+      state.intervaloConfianca.amostraB = [];
+      state.intervaloConfianca.nivelConfianca = '';
+      state.intervaloConfianca.step = 1;
+    }
   },
   round: (num: number, places: number) => {
     if (!('' + num).includes('e')) {
